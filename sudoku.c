@@ -54,31 +54,62 @@ void print_node(Node* n){
 Si el estado es válido la función retorna 1, si no lo es retorna 0.
 */
 
+/*
+**¿Cómo recorrer las submatrices de 3x3?**
+El siguiente código se puede usar para recorrer los elementos de una sumbatriz k (por ejemplo k=4):
+
+    int k=4,p; 
+    for(p=0;p<9;p++){
+        int i=3*(k/3) + (p/3) ;
+        int j=3*(k%3) + (p%3) ;
+        printf("%d ",nodo->sudo[i][j]);
+        if(p%3 == 2) printf("\n");
+    }
+*/
+
 int is_valid(Node* n){
-  // 1. Verifica si el nodo es válido
     int i,j,k;
-    // Se crean matrices para verificar si hay repetidos
-    // en filas, columnas y submatrices
-    int row[9][10]={0};
-    int col[9][10]={0};
-    int box[3][3][10]={0};
-    // Se recorren las filas y columnas
-    // y se verifica si hay repetidos
-    // uso del doble for para recorrer filas y columnas
-    // y un tercer for para recorrer los números
+    // Verifica filas
     for(i=0;i<9;i++){
+        int row[10]={0};
         for(j=0;j<9;j++){
             if(n->sudo[i][j]!=0){
-                k=n->sudo[i][j];
-                if(row[i][k] || col[j][k] || box[i/3][j/3][k]){
+                if(row[n->sudo[i][j]]==1){
                     return 0;
                 }
-                row[i][k]=1;
-                col[j][k]=1;
-                box[i/3][j/3][k]=1;
+                row[n->sudo[i][j]]=1;
             }
         }
     }
+
+    // Verifica columnas
+    for(i=0;i<9;i++){
+        int col[10]={0};
+        for(j=0;j<9;j++){
+            if(n->sudo[j][i]!=0){
+                if(col[n->sudo[j][i]]==1){
+                    return 0;
+                }
+                col[n->sudo[j][i]]=1;
+            }
+        }
+    }
+
+    // Verifica submatrices de 3x3
+    for(k=0;k<9;k++){
+        int sub[10]={0};
+        for(int p=0;p<9;p++){
+            int i=3*(k/3) + (p/3) ;
+            int j=3*(k%3) + (p%3) ;
+            if(n->sudo[i][j]!=0){
+                if(sub[n->sudo[i][j]]==1){
+                    return 0;
+                }
+                sub[n->sudo[i][j]]=1;
+            }
+        }
+    }
+
     return 1;
 }
 
