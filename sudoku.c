@@ -55,11 +55,17 @@ Si el estado es válido la función retorna 1, si no lo es retorna 0.
 */
 
 int is_valid(Node* n){
+  // 1. Verifica si el nodo es válido
     int i,j,k;
+    // Se crean matrices para verificar si hay repetidos
+    // en filas, columnas y submatrices
     int row[9][10]={0};
     int col[9][10]={0};
     int box[3][3][10]={0};
-
+    // Se recorren las filas y columnas
+    // y se verifica si hay repetidos
+    // uso del doble for para recorrer filas y columnas
+    // y un tercer for para recorrer los números
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
             if(n->sudo[i][j]!=0){
@@ -132,8 +138,21 @@ List* get_adj_nodes(Node* n){
     return list;
 }
 
+/*
+4.Implemente la función **int is_final(Node * n)**. Esta función retorna 1 si el nodo corresponde a un nodo final 
+(es decir, todos los valores de la matriz son distintos a 0) y 0 en caso contrario.
+*/
 int is_final(Node* n){
-    return 0;
+    // Verifica si el nodo es final
+    int i,j;
+    for(i=0;i<9;i++){
+        for(j=0;j<9;j++){
+            if(n->sudo[i][j]==0){
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
 
 Node* DFS(Node* initial, int* cont){
