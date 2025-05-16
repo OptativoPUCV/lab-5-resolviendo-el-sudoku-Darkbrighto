@@ -132,24 +132,18 @@ int get_size();
 
 List* get_adj_nodes(Node* n){
     List* list=createList();
-    // Recorre el sudoku buscando un 0
-    // y genera los nodos adyacentes
-    // al nodo n
-    // y los agrega a la lista
     Node* new;
-    int i,j,k;
+    int i,j;
     for(i=0;i<9;i++){
         for(j=0;j<9;j++){
             if(n->sudo[i][j]==0){
-                for(k=1;k<=9;k++){
+                for(int k=1;k<=9;k++){
                     new=copy(n);
                     new->sudo[i][j]=k;
                     if(is_valid(new)){
-                        // Agrega el nodo a la lista
                         pushBack(list, new);
                     }
                 }
-                return list;
             }
         }
     }
