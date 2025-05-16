@@ -140,9 +140,10 @@ List* get_adj_nodes(Node* n){
                 for(int k=1;k<=9;k++){
                     new=copy(n);
                     new->sudo[i][j]=k;
-                    if(is_valid(new)){
-                        pushBack(list, new);
-                    }
+                    // no usar is_valid(new) en la condición
+                    // porque se está modificando el nodo
+                    // si el nodo es válido, lo agrega a la lista
+                    pushBack(list, new);
                 }
             }
         }
