@@ -52,13 +52,33 @@ int is_valid(Node* n){
 /*1.Cree una función que a partir de un nodo genere una **lista con los nodos adyacentes**:
 
     List* get_adj_nodes(Node* n){
-       List* list=createList();
-       /* 
-       obtenga los nodos adyacentes a n
-       y agréguelos a la lista
-       return list;
+      List* list=createList();
+      /* 
+      obtenga los nodos adyacentes a n
+      y agréguelos a la lista
+      return list;
     }
-       
+    }
+*/
+
+/*
+
+List* createList();
+void clean(List* list);
+int is_empty(List* list);
+void* front(List* list);
+void* first(List* list);
+void* next(List* list);
+void* last(List* list);
+void* prev(List* list);
+void popFront(List* list);
+void popBack(List* list);
+void pushFront(List* list, void* data);
+void pushBack(List* list, void* data);
+void pushCurrent(List* list, void* data);
+void popCurrent(List* list);
+int get_size();
+
 */
 
 // 3.Modifique la función *get_adj_nodes* para que sólo los nodos válidos sean retornados (use la función *is_valid*).
@@ -79,7 +99,7 @@ List* get_adj_nodes(Node* n){
                     new->sudo[i][j]=k;
                     if(is_valid(new)){
                         // Agrega el nodo a la lista
-                        add(list, new);
+                        pushBack(list, new);
                     }
                 }
                 return list;
