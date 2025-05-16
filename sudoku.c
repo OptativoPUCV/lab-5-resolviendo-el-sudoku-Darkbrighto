@@ -125,26 +125,6 @@ int is_valid(Node* n){
     }
 */
 
-/*
-
-List* createList();
-void clean(List* list);
-int is_empty(List* list);
-void* front(List* list);
-void* first(List* list);
-void* next(List* list);
-void* last(List* list);
-void* prev(List* list);
-void popFront(List* list);
-void popBack(List* list);
-void pushFront(List* list, void* data);
-void pushBack(List* list, void* data);
-void pushCurrent(List* list, void* data);
-void popCurrent(List* list);
-int get_size();
-
-*/
-
 // 3.Modifique la función *get_adj_nodes* para que sólo los nodos válidos sean retornados (use la función *is_valid*).
 
 List* get_adj_nodes(Node* n){
@@ -208,6 +188,13 @@ int is_final(Node* n){
 Almacene en la variable cont, la cantidad de iteraciones que realiza el algoritmo.
 */
 Node* DFS(Node* initial, int* cont){
+    // 1. Cree un stack S (pila) e inserte el nodo.
+    // 2. Mientras el stack S no se encuentre vacío:
+    //    a) Saque y elimine el primer nodo de S.
+    //    b) Verifique si corresponde a un estado final, si es así retorne el nodo.
+    //    c) Obtenga la lista de nodos adyacentes al nodo.
+    //    d) Agregue los nodos de la lista (uno por uno) al stack S.
+    //    e) Libere la memoria usada por el nodo.
     List* stack = createList();
     pushBack(stack, initial);
     Node* current;
