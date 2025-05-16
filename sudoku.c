@@ -148,21 +148,22 @@ int get_size();
 // 3.Modifique la función *get_adj_nodes* para que sólo los nodos válidos sean retornados (use la función *is_valid*).
 
 List* get_adj_nodes(Node* n){
-    List* list=createList();
+    List* list = createList();
     Node* new;
-    int i,j;
-    for(i=0;i<9;i++){
-        for(j=0;j<9;j++){
-            if(n->sudo[i][j]==0){
-                for(int k=1;k<=9;k++){
-                    new=copy(n);
-                    new->sudo[i][j]=k;
-                    // Verifica si el nuevo nodo es válido
-                    // y lo agrega a la lista
-                    if(is_valid(new)){
+    int i, j;
+
+    for (i = 0; i < 9; i++) {
+        for (j = 0; j < 9; j++) {
+            if (n->sudo[i][j] == 0) {
+                for (int k = 1; k <= 9; k++) {
+                    new = copy(n);
+                    new->sudo[i][j] = k;
+                    if (is_valid(new)) {
                         pushBack(list, new);
                     }
                 }
+                // detener la función tras procesar la primera celda vacía
+                return list;
             }
         }
     }
