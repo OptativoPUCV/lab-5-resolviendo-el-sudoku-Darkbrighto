@@ -1,0 +1,28 @@
+Fri, May 16, 2025  2:36:16 AM: 
+ sudoku.c | 84 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 84 insertions(+)
+Compilation failed
+In file included from test.c:5:0:
+sudoku.c:56:8: error: "/*" within comment [-Werror=comment]
+        /*
+         
+sudoku.c: In function 'get_adj_nodes':
+sudoku.c:82:25: error: implicit declaration of function 'add' [-Werror=implicit-function-declaration]
+                         add(list, new);
+                         ^~~
+In file included from test.c:5:0:
+sudoku.c: At top level:
+sudoku.c:102:5: error: redefinition of 'is_valid'
+ int is_valid(Node* n){
+     ^~~~~~~~
+In file included from test.c:5:0:
+sudoku.c:46:5: note: previous definition of 'is_valid' was here
+ int is_valid(Node* n){
+     ^~~~~~~~
+In file included from test.c:5:0:
+sudoku.c: In function 'is_valid':
+sudoku.c:107:13: error: unused variable 'k' [-Werror=unused-variable]
+     int i,j,k;
+             ^
+cc1.exe: all warnings being treated as errors
+3f0e54c

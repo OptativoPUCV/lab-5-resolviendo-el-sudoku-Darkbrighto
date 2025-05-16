@@ -49,11 +49,95 @@ int is_valid(Node* n){
 }
 
 
+/*1.Cree una función que a partir de un nodo genere una **lista con los nodos adyacentes**:
+
+    List* get_adj_nodes(Node* n){
+       List* list=createList();
+       /* 
+       obtenga los nodos adyacentes a n
+       y agréguelos a la lista
+       return list;
+    }
+       
+*/
+
+// 3.Modifique la función *get_adj_nodes* para que sólo los nodos válidos sean retornados (use la función *is_valid*).
+
 List* get_adj_nodes(Node* n){
     List* list=createList();
+    // Recorre el sudoku buscando un 0
+    // y genera los nodos adyacentes
+    // al nodo n
+    // y los agrega a la lista
+    Node* new;
+    int i,j,k;
+    for(i=0;i<9;i++){
+        for(j=0;j<9;j++){
+            if(n->sudo[i][j]==0){
+                for(k=1;k<=9;k++){
+                    new=copy(n);
+                    new->sudo[i][j]=k;
+                    if(is_valid(new)){
+                        // Agrega el nodo a la lista
+                        add(list, new);
+                    }
+                }
+                return list;
+            }
+        }
+    }
     return list;
 }
 
+/*
+2.Cree la función **int is_valid(Node * n)**, para validar si un estado/nodo es válido (cumple con las restricciones del problema). Debe validar que:
+
+- No se repitan números en las filas
+- No se repitan números en las columnas
+- No se repitan números en las submatrices de 3x3
+
+Si el estado es válido la función retorna 1, si no lo es retorna 0.
+*/
+
+int is_valid(Node* n){
+  // Recorre el sudoku buscando un 0
+  // y valida que no se repitan números en las filas, columnas y submatrices
+  // de 3x3
+  // y retorna 1 si es válido o 0 si no lo es
+    int i,j,k;
+  // define row, col y box como arreglos de 10 elementos
+    // para almacenar los números del 1 al 9
+    // y un elemento adicional para el 0
+    // inicializa los arreglos en 0
+    int row[10], col[10], box[10];
+    for(i=0;i<9;i++){
+        for(j=0;j<9;j++){
+            row[j]=0;
+            col[j]=0;
+            box[j]=0;
+        }
+        for(j=0;j<9;j++){
+            // si n->sudo[i][j] es diferente de 0
+            // verifica si ya existe en la fila
+            if(n->sudo[i][j]!=0){
+                if(row[n->sudo[i][j]]==1)
+                    return 0;
+                row[n->sudo[i][j]]=1;
+            }
+            if(n->sudo[j][i]!=0){
+                if(col[n->sudo[j][i]]==1)
+                    return 0;
+                col[n->sudo[j][i]]=1;
+            }
+            if(n->sudo[(i/3)*3+(j/3)][(i%3)*3+(j%3)]!=0){
+                if(box[n->sudo[(i/3)*3+(j/3)][(i%3)*3+(j%3)]]==1)
+                    return 0;
+                box[n->sudo[(i/3)*3+(j/3)][(i%3)*3+(j%3)]]=1;
+            }
+        }
+    }
+    return 1;
+}
 
 int is_final(Node* n){
     return 0;
